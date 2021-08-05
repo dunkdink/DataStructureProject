@@ -1,0 +1,107 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <br>
+    <h2 align = "center" >ClassRoom : Probability and Statistic2564</h2>
+    <br>
+    <!-- <h4>Please login to join class : </h4>
+    <form action="addIDNameProb" method="post">
+        {% csrf_token %}
+        <div class = "from-group">
+            <label for="">Student ID : </label>
+            <input type="text" class = "form-control" name="studentID">
+        </div>
+        <div class = "from-group">
+            <label for="">Name-Surname : </label>
+            <input type="text" class = "form-control" name="studentName">
+        </div>
+        <input type="submit" value="Join Class Room" class="btn btn-primary">
+    </form> -->
+    <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <h4>Please login to join class : </h4>
+            <form action="addIDNameProb" method="post">
+                {% csrf_token %}
+                <div class = "from-group">
+                    <label for="">Student ID : </label>
+                    <input type="text" class = "form-control" name="studentID">
+                </div>
+                <div class = "from-group">
+                    <label for="">Name-Surname : </label>
+                    <input type="text" class = "form-control" name="studentName">
+                </div>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+          </div>
+          <div class="col-sm">
+            <h4>Enter ID to exit class : </h4>
+            <form action="problogout" method="post">
+                {% csrf_token %}
+                <div class = "from-group">
+                    <label for="">Student ID : </label>
+                    <input type="text" class = "form-control" name="studentID">
+                </div>
+                <div class = "from-group">
+                    <label for="">Name-Surname : </label>
+                    <input type="text" class = "form-control" name="studentName">
+                </div>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+          </div>
+          <div class="col-sm">
+            <h4>Enter Information to Creat Account : </h4>
+            <form action="addIDNameDatastruct" method="post">
+                {% csrf_token %}
+                <div class = "from-group">
+                    <label for="">Student ID : </label>
+                    <input type="text" class = "form-control" name="studentID">
+                </div>
+                <div class = "from-group">
+                    <label for="">Name-Surname : </label>
+                    <input type="text" class = "form-control" name="studentName">
+                </div>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+          </div>
+        </div>
+    </div>
+    <br>
+    {% if alreadylogin == True %}
+        {% if addFormed == True %}
+            <p>You are In Class !!</p>
+        {% endif %}
+    {% endif %}
+    {% if noInDataBase == True %}
+        <p>You are not Student !!!</p>
+    {% endif %}
+    {% if alreadyRegister == True %}
+        <p>You are already Register as a Student !!!</p>
+    {% endif %}
+    {% if registerSucess == True %}
+        <p>Register Sucess !!</p>
+    {% endif %}
+    <div class="btn-group">
+        <h3>Active Student in Class :</h3>
+        &emsp;
+        <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Sorted by :
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Id น้อยไปมาก</a></li>
+            <li><a class="dropdown-item" href="#">Id มากไปน้อย</a></li>
+            <li><a class="dropdown-item" href="#">Time lastest</a></li>
+            <li><a class="dropdown-item" href="#">Time earliest</a></li>
+        </ul>
+    </div>
+    <ul>
+        <br>
+        {% for i in studentInProb %}
+            <li>
+                <p>{{i}}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

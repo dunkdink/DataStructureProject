@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <br>
+    <h1>All Student</h1>
+    <ul>
+        {% for i in allStudent %}
+        <li>
+            <p>{{i}}  &emsp; <a href="#" class="link-primary">more Information</a> </p> 
+        </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

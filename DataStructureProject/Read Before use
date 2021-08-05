@@ -1,0 +1,56 @@
+ก่อนที่ทุกคนๆจะใช้งานได้จำเป็นต้องมี Django และ Virtual Env ก่อน http://bit.ly/2UBqmfK ตาม link เลย
+ตอนแรกเราต้องเลือกว่าจะลง Django ที่ไหน เมล เอา Django ไว้ใน Virtual EnV เวลาจะ run ต้องใช้คำสั่ง " workon "ชื่อ virtual env นั้นๆ" "
+ต้องโหลด file ทุก file ที่เมลมี น่ะ!! หลังจากนั้นถึงจะ Run ได้
+วิธี Run:
+  ใน terminal ของ Visual (ใช้ CMD) ให้เป็น Directory นี้ C:\บลาๆๆๆๆๆ\บลาๆๆๆๆ\บลาๆๆๆๆๆ\DataStructProject\DataStructProject>
+  จากนั้นพิม workon "ชื่อ virtual env ที่ลง django"
+  จะขึ้นแบบนี้ (DataStructProjectVirtual) C:\Users\naraw\Desktop\DataStructProject\DataStructProject> ที่วงเล็บด้านหน้าจะเป็นชื่อ Virtual Env ของเมล
+  ต่อไป พิม python manage.py runserver
+  แล้วมันจะ run ให้ พร้อมให้ link เรามา ถ้าเข้าไปเจอหน้ากากๆ ให้เพิ่ม /home ด้านหลัง link
+
+อธิบาย file นะ ตัว เมล จะทำงานหลักใน views.py จะมีพวก function แยะแยะไปหมด ถ้าอยากเพิ่ม อะไรลองทำตามนี้
+ขั้น แรก สมมุติเมลอยากเพิ่ม web อีกหน้า เราต้องสร้างเส้นทางให้หน้านั้นก่อน โดยผ่าน file ชื่อ urls.py โดยใช้คำสั่ง path('ชื่อpart',function ที่จะเรียกใช้ใน views.py)
+ใน file urls.py จะเก็บ part ต่างไว้ในรูปแบบ list นะเพื่อนๆ เวลาเพิ่มดูดีๆ
+ที่ นี้เราก็มีเส้นทางแล้ว พอ มีการใช้เส้นทางนี้ มันจะไปเรียก function ใน views.py ที่เราใส่ไปหลัง path 
+ตัว views.py จะเป็นที่เก็บ function ต่างๆของเมล รวมถึง init class ด้วย 
+การทำงานจะเป็นพอมีการเรียกใช้ ก็ ทำงาน เฉพาะ function ที่เรียก ที่นี้ มัน จะ return เป็นการ render 
+
+
+ตัวอย่าง:
+
+
+def registerIDprob(request):
+    idS = request.POST['studentID']
+    name = request.POST['studentName']
+    alreadylogin = False
+    noInDataBase = False
+    alreadyRegister = False
+    registerSucess = False
+    ############################################################################ สร้าง Sorted
+    if idS == '' or name  == '':
+        return render(request,'problogin.html',{'studentInProb':studentInProb.getlst(),'alreadylogin':alreadylogin,'noInDataBase':noInDataBase,'addFormed':addFormed,
+        'alreadyRegister':alreadyRegister,'registerSucess':registerSucess})
+    else:
+        if idS in allId.items:
+            alreadyRegister = True
+            return render(request,'problogin.html',{'studentInProb':studentInProb.getlst(),'alreadylogin':alreadylogin,'noInDataBase':noInDataBase,'addFormed':addFormed,
+        'alreadyRegister':alreadyRegister,'registerSucess':registerSucess})
+        else:
+            registerSucess = True
+            fullName = str(idS) + " " + str(name)
+            allStudentBST.insert(fullName)
+            allId.push(idS)
+            allStudent.push(fullName)
+            f = open('studentDataBase.txt', 'a', encoding="utf8")
+            f.write(fullName + '\n')
+            f.close()
+            return render(request,'problogin.html',{'studentInProb':studentInProb.getlst(),'alreadylogin':alreadylogin,'noInDataBase':noInDataBase,'addFormed':addFormed,
+        'alreadyRegister':alreadyRegister,'registerSucess':registerSucess})
+        
+จะสังเกตว่า return เป็นการ render มีรูปแบบดังนี้ render(request,"ชื่อ file html",{ตัวแปลที่จะนำไปแสดงในหน้า html นั้นๆ โดยจะอยู่ในรูป dic เวลาเพื่อนสร้างก็ใช้ชื่อ key กับ value เดียวกันเลยก็ได้})
+หล้งจากนั้น ต่อที่ file html ถ้าต้องการให้แสดงตัวแปลที่ส่งมาจาก function ใช้ {{ชื่อตัวแปลนั้นๆ}}
+
+ทั้งหมดมีเท่านี้ มันไม่ได้ยากขนาดนั้น เราจะเขียนกันง่าย ใครมีไรส่งสัยถามใน line เลย เมล ไม่ได้เก่งเลย เมล เชื่อว่าถ้าเมลทำได้ ทุกคนน่าจะทำได้ไม่ยาก มีไรไม่เข้าใจ ถามใน line เลย
+
+
+
